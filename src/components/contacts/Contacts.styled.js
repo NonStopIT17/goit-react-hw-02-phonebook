@@ -20,7 +20,7 @@ border-radius: 5px;
 cursor: pointer;
 border:none;
 :hover{
-        border: 1px dashed gray;
+        border: 1px dashed red;
         cursor: pointer;
     }
 `

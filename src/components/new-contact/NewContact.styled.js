@@ -6,7 +6,7 @@ display: flex;
 flex-direction: column;
 width: 300px;
 height: 200px;
-border: 1px solid black;
+border: 1px solid green;
 margin-bottom: 20px;
 
 label{
@@ -33,7 +33,7 @@ button{
     border-radius: 5px;
     border: none;
     :hover{
-        border: 1px dashed gray;
+        border: 1px dashed green;
         cursor: pointer;
     }
 }
