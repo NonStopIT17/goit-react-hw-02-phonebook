@@ -15,12 +15,7 @@ export class App extends Component {
     filter: '',
   };
 
-  submitHandling = (event) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const name = form.elements.name.value;
-    const number = form.elements.number.value;
-
+  submitHandling = ({ name, number }) => {
     const isContactExists = this.state.contacts.some(
       (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -36,7 +31,6 @@ export class App extends Component {
       this.setState((prevState) => ({
         contacts: [...prevState.contacts, newContact],
       }));
-      form.reset();
     }
   };
 
@@ -72,6 +66,7 @@ export class App extends Component {
     );
   }
 }
+
 
 
 
