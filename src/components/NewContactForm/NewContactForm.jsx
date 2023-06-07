@@ -1,4 +1,4 @@
-import { ContactForm } from "./NewContact.styled"
+import { ContactForm } from "./NewContactForm.styled"
 import PropTypes from 'prop-types';
 
 export const NewContactForm = ({submitHandling}) =>{

@@ -1,7 +1,7 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { ContactList, Filter } from "./contacts/Contacts";
 import { GlobalStyle } from "./GlobalStyle.styled";
-import { NewContactForm } from "./new-contact/NewContact";
+import { NewContactForm } from "./NewContactForm/NewContactForm";
 import { v4 as uuidv4 } from 'uuid';
 
 export class App extends Component {
@@ -20,15 +20,24 @@ export class App extends Component {
     const form = event.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    const newContact = {
-      id: uuidv4(),
-      name: name,
-      number: number,
-    };
-    this.setState((prevState) => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
-    form.reset(); // Очищення форми
+
+    const isContactExists = this.state.contacts.some(
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (isContactExists) {
+      alert(`${name} is already in contacts`);
+    } else {
+      const newContact = {
+        id: uuidv4(),
+        name: name,
+        number: number,
+      };
+      this.setState((prevState) => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+      form.reset();
+    }
   };
 
   setFilter = (event) => {
@@ -63,5 +72,6 @@ export class App extends Component {
     );
   }
 }
+
 
 
