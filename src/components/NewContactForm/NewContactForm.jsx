@@ -1,13 +1,20 @@
 import { ContactForm } from "./NewContactForm.styled";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-export const NewContactForm = ({ submitHandling }) => {
+export const NewContactForm = ({ addContact }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
+    const form = event.currentTarget;
     const name = form.elements.name.value;
     const number = form.elements.number.value;
-    submitHandling({ name, number });
+
+    const contact = {
+      name: name,
+      number: number,
+    };
+
+    addContact(contact);
+
     form.reset();
   };
 
@@ -41,5 +48,6 @@ export const NewContactForm = ({ submitHandling }) => {
 };
 
 NewContactForm.propTypes = {
-  submitHandling: PropTypes.func.isRequired,
+  addContact: PropTypes.func.isRequired,
 };
+
