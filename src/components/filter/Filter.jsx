@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FilterForm } from "../contacts/Contacts.styled";
 
-export const Filter = ({ setFilter }) => {
+function Filter({ setFilter }) {
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
@@ -19,8 +19,13 @@ export const Filter = ({ setFilter }) => {
       </label>
     </FilterForm>
   );
-};
+}
 
 Filter.propTypes = {
   setFilter: PropTypes.func.isRequired,
 };
+
+export default Filter;
+
+
+

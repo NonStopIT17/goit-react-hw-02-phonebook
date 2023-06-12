@@ -1,21 +1,26 @@
 import React, { Component } from "react";
-import { ContactList } from "./contacts/Contacts";
+import { ContactList } from "../components/contacts/Contacts";
 import { GlobalStyle } from "./GlobalStyle.styled";
-import { NewContactForm } from "./NewContactForm/NewContactForm";
+import NewContactForm from "./NewContactForm/NewContactForm";
 import { v4 as uuidv4 } from "uuid";
 
-export class App extends Component {
-  state = {
-    contacts: [
-      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
-  };
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contacts: [
+        { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+        { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+        { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+        { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+      ],
+    };
+  }
 
   addContact = (contact) => {
-    const isContactExists = this.state.contacts.some(
+    const { contacts } = this.state;
+
+    const isContactExists = contacts.some(
       (existingContact) =>
         existingContact.name.toLowerCase() === contact.name.toLowerCase()
     );
@@ -36,9 +41,12 @@ export class App extends Component {
   };
 
   deleteContact = (id) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter((contact) => contact.id !== id),
-    }));
+    const { contacts } = this.state;
+    const updatedContacts = contacts.filter((contact) => contact.id !== id);
+
+    this.setState({
+      contacts: updatedContacts,
+    });
   };
 
   render() {
@@ -58,4 +66,10 @@ export class App extends Component {
     );
   }
 }
+
+export default App;
+
+
+
+
 

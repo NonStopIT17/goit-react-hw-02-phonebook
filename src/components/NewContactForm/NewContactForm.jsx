@@ -1,7 +1,8 @@
-import { ContactForm } from "./NewContactForm.styled";
+import React from "react";
 import PropTypes from "prop-types";
+import { ContactForm } from "../NewContactForm/NewContactForm.styled";
 
-export const NewContactForm = ({ addContact }) => {
+function NewContactForm({ addContact }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -45,9 +46,15 @@ export const NewContactForm = ({ addContact }) => {
       </ContactForm>
     </>
   );
-};
+}
 
 NewContactForm.propTypes = {
   addContact: PropTypes.func.isRequired,
 };
+
+export default NewContactForm;
+
+
+
+
 
