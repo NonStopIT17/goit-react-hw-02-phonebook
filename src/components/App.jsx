@@ -3,19 +3,18 @@ import { ContactList } from "../components/contacts/Contacts";
 import { GlobalStyle } from "./GlobalStyle.styled";
 import NewContactForm from "./NewContactForm/NewContactForm";
 import { v4 as uuidv4 } from "uuid";
+import Filter from "../components/filter/Filter";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contacts: [
-        { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-        { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-        { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-        { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-      ],
-    };
-  }
+  state = {
+    contacts: [
+      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+    ],
+    filter: "",
+  };
 
   addContact = (contact) => {
     const { contacts } = this.state;
@@ -41,16 +40,27 @@ class App extends Component {
   };
 
   deleteContact = (id) => {
-    const { contacts } = this.state;
-    const updatedContacts = contacts.filter((contact) => contact.id !== id);
+    this.setState((prevState) => {
+      const updatedContacts = prevState.contacts.filter(
+        (contact) => contact.id !== id
+      );
 
-    this.setState({
-      contacts: updatedContacts,
+      return {
+        contacts: updatedContacts,
+      };
     });
   };
 
+  handleFilterChange = (value) => {
+    this.setState({ filter: value });
+  };
+
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
+
+    const filteredContacts = contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
     return (
       <div style={{ padding: "20px" }}>
@@ -60,7 +70,12 @@ class App extends Component {
           <NewContactForm addContact={this.addContact} />
 
           <h2 style={{ marginBottom: "10px" }}>Contacts</h2>
-          <ContactList contacts={contacts} deleteContact={this.deleteContact} />
+          <Filter setFilter={this.handleFilterChange} />
+
+          <ContactList
+            contacts={filteredContacts}
+            deleteContact={this.deleteContact}
+          />
         </div>
       </div>
     );
@@ -68,6 +83,8 @@ class App extends Component {
 }
 
 export default App;
+
+
 
 
 
